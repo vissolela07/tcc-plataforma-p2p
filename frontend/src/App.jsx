@@ -1,10 +1,10 @@
-
+import AppRouter from './router/AppRouter.jsx'
 
 function App() {
 
   return (
     <>
-      <h1>Plataforma P2P</h1>
+      <AppRouter />
     </>
   )
 }
