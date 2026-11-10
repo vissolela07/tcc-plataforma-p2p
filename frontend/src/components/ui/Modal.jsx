@@ -1,6 +1,21 @@
-function Modal({ aberto, aoFechar, titulo, children }) {
-  if (!aberto) return null;
+import { useEffect } from 'react';
 
+function Modal({ aberto, aoFechar, titulo, children }) {
+  useEffect(() => {
+    if (!aberto) return;
+
+    function aoCarregarTecla(evento) {
+      if (evento.key === 'Escape') aoFechar();
+    }
+
+    document.addEventListener('keydown', aoCarregarTecla);
+
+    return () => {
+      document.removeEventListener('keydown', aoCarregarTecla);
+    };
+  }, [aberto, aoFechar]);
+
+  if (!aberto) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
       <div
