@@ -1,7 +1,7 @@
 const estilos = {
-  sucesso: 'border-green-300 bg-green-50 text-green-800',
-  erro: 'border-red-300 bg-red-50 text-red-800',
-  info: 'border-blue-300 bg-blue-50 text-blue-800',
+  sucesso: 'border-oliva/40 bg-oliva/10 text-oliva',
+  erro: 'border-bordo/40 bg-bordo/10 text-bordo',
+  info: 'border-nogueira/40 bg-nogueira/10 text-nogueira',
 };
 
 function Alerta({ tipo = 'info', mensagem, aoFechar }) {
