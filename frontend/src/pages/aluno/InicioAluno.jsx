@@ -1,6 +1,18 @@
 import { useState } from 'react'
 import Botao from '../../components/ui/Botao'
 import CampoTexto from '../../components/ui/CampoTexto'
+import Etiqueta from '../../components/ui/Etiqueta'
+import Tabela from '../../components/ui/Tabela'
+
+const colunas = [
+  { chave: 'nome', titulo: 'Nome' },
+  { chave: 'email', titulo: 'Email' }
+]
+
+const alunos = [
+  { id: 1, nome: 'Ana', email: 'ana@exemplo.com' },
+  { id: 2, nome: 'Rui', email: 'rui@exemplo.com' }
+]
 
 function InicioAluno() {
   const [nome, setNome] = useState('')
@@ -29,6 +41,13 @@ function InicioAluno() {
         Início do aluno
       </h1>
 
+      <div className="flex flex-wrap gap-2">
+        <Etiqueta texto="Python" />
+        <Etiqueta texto="Concluído" cor="sucesso" />
+        <Etiqueta texto="Matemática" cor="neutra" />
+        <Etiqueta texto="Erro" cor="erro" />
+      </div>
+
       <div className="flex flex-wrap gap-3">
         <Botao
           texto="Testar botão"
@@ -54,6 +73,19 @@ function InicioAluno() {
 
         <Botao texto="Testar campo" tipo="submit" />
       </form>
+
+      <Tabela
+        colunas={colunas}
+        linhas={alunos}
+        acoes={(aluno) => (
+          <Botao
+            texto="Ver nome"
+            variante="secundario"
+            onClick={() => alert(aluno.nome)}
+          />
+        )}
+        mensagemVazia="Nenhum aluno encontrado."
+      />
     </div>
   )
 }
