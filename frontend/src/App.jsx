@@ -1,11 +1,63 @@
-import AppRouter from './router/AppRouter.jsx'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
+import { AuthProvider } from './context/AuthContext'
+import { RotaProtegida } from './components/layout/RotaProtegida'
+import LayoutAluno from './components/layout/LayoutAluno'
+import LayoutProfessor from './components/layout/LayoutProfessor'
+import LayoutAdmin from './components/layout/LayoutAdmin'
 
 function App() {
-
   return (
-    <>
-      <AppRouter />
-    </>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<div>Página de Login</div>} />
+
+          <Route
+            path="/aluno"
+            element={
+              <RotaProtegida papeis={['aluno']}>
+                <LayoutAluno />
+              </RotaProtegida>
+            }
+          >
+            <Route index element={<div>Início do Aluno</div>} />
+            <Route path="perfil" element={<div>Perfil do Aluno</div>} />
+            <Route path="materiais" element={<div>Materiais do Aluno</div>} />
+            <Route path="projetos" element={<div>Projetos do Aluno</div>} />
+          </Route>
+
+          <Route
+            path="/professor"
+            element={
+              <RotaProtegida papeis={['professor']}>
+                <LayoutProfessor />
+              </RotaProtegida>
+            }
+          >
+            <Route index element={<div>Início do Professor</div>} />
+            <Route path="turmas" element={<div>Turmas do Professor</div>} />
+            <Route path="materiais" element={<div>Materiais do Professor</div>} />
+            <Route path="projetos" element={<div>Projetos do Professor</div>} />
+          </Route>
+
+          <Route
+            path="/admin"
+            element={
+              <RotaProtegida papeis={['administrador']}>
+                <LayoutAdmin />
+              </RotaProtegida>
+            }
+          >
+            <Route index element={<div>Início da Administração</div>} />
+            <Route path="utilizadores" element={<div>Gestão de Utilizadores</div>} />
+            <Route path="cursos" element={<div>Gestão de Cursos</div>} />
+            <Route path="configuracoes" element={<div>Configurações</div>} />
+          </Route>
+
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
