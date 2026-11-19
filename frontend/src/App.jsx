@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
+import {  Routes, Route, Navigate } from 'react-router'
 import { AuthProvider } from './context/AuthContext'
 import { RotaProtegida } from './components/layout/RotaProtegida'
+import Login from './pages/auth/Login'
 import LayoutAluno from './components/layout/LayoutAluno'
 import LayoutProfessor from './components/layout/LayoutProfessor'
 import LayoutAdmin from './components/layout/LayoutAdmin'
@@ -11,9 +12,8 @@ import InicioAdmin from './pages/admin/InicioAdmin'
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<div>Página de Login</div>} />
+          <Route path="/login" element={<Login/>} />
 
           <Route
             path="/aluno"
@@ -59,7 +59,6 @@ function App() {
 
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
-      </BrowserRouter>
     </AuthProvider>
   )
 }
