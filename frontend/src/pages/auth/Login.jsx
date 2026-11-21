@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
+import Alerta from '../../components/ui/Alerta'
+import Botao from '../../components/ui/Botao'
+import CampoTexto from '../../components/ui/CampoTexto'
 
 function Login() {
   const { entrar } = useAuth()
@@ -14,6 +17,12 @@ function Login() {
   async function lidarComSubmissao(evento) {
     evento.preventDefault()
     setErro('')
+
+    if (!email || !senha) {
+      setErro('Preencha o email e a senha.')
+      return
+    }
+
     setASubmeter(true)
 
     try {
@@ -40,51 +49,33 @@ function Login() {
     <div className="min-h-screen flex items-center justify-center bg-creme text-nogueira p-4">
       <form
         onSubmit={lidarComSubmissao}
-        className="w-full max-w-sm border border-nogueira rounded p-6 flex flex-col gap-4"
+        className="w-full max-w-sm border border-nogueira/20 bg-white rounded-lg p-6 flex flex-col gap-4"
       >
         <h1 className="text-2xl font-bold">Iniciar sessão</h1>
 
-        {erro && (
-          <p className="text-sm text-terracota font-medium">
-            {erro}
-          </p>
-        )}
+        {erro && <Alerta tipo="erro" mensagem={erro} />}
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="email" className="text-sm font-medium">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="px-3 py-2 rounded border border-nogueira bg-creme"
-          />
-        </div>
+        <CampoTexto
+          rotulo="Email"
+          nome="email"
+          tipo="email"
+          valor={email}
+          aoMudar={setEmail}
+        />
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="senha" className="text-sm font-medium">
-            Senha
-          </label>
-          <input
-            id="senha"
-            type="password"
-            required
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            className="px-3 py-2 rounded border border-nogueira bg-creme"
-          />
-        </div>
+        <CampoTexto
+          rotulo="Senha"
+          nome="senha"
+          tipo="password"
+          valor={senha}
+          aoMudar={setSenha}
+        />
 
-        <button
-          type="submit"
-          disabled={aSubmeter}
-          className="mt-2 px-4 py-2 rounded bg-terracota text-creme font-semibold disabled:opacity-60"
-        >
-          {aSubmeter ? 'A entrar...' : 'Entrar'}
-        </button>
+        <Botao
+          texto={aSubmeter ? 'A entrar...' : 'Entrar'}
+          tipo="submit"
+          desativado={aSubmeter}
+        />
       </form>
     </div>
   )
