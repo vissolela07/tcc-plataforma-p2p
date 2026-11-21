@@ -1,6 +1,12 @@
 import { Navigate } from 'react-router'
 import { useAuth } from '../../context/AuthContext'
 
+const inicioPorPapel = {
+  aluno: '/aluno',
+  professor: '/professor',
+  administrador: '/admin',
+}
+
 export function RotaProtegida({ children, papeis }) {
   const { utilizador, aCarregar, papel } = useAuth()
 
@@ -17,7 +23,7 @@ export function RotaProtegida({ children, papeis }) {
   }
 
   if (papeis && !papeis.includes(papel)) {
-    return <Navigate to={`/${papel}`} replace />
+    return <Navigate to={inicioPorPapel[papel] || '/login'} replace />
   }
 
   return children
