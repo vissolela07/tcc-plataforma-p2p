@@ -19,11 +19,11 @@ function LayoutAdmin() {
           <NavLink to="/admin/utilizadores" className={estiloLink}>
             Utilizadores
           </NavLink>
-          <NavLink to="/admin/cursos" className={estiloLink}>
-            Cursos
+          <NavLink to="/admin/disciplinas" className={estiloLink}>
+            Disciplinas
           </NavLink>
-          <NavLink to="/admin/configuracoes" className={estiloLink}>
-            Configurações
+          <NavLink to="/admin/moderacao" className={estiloLink}>
+            Moderação
           </NavLink>
         </nav>
       </aside>

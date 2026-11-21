@@ -16,14 +16,11 @@ function LayoutProfessor() {
           <NavLink to="/professor" end className={estiloLink}>
             Início
           </NavLink>
-          <NavLink to="/professor/turmas" className={estiloLink}>
-            Turmas
-          </NavLink>
           <NavLink to="/professor/materiais" className={estiloLink}>
             Materiais
           </NavLink>
           <NavLink to="/professor/projetos" className={estiloLink}>
-            Projetos
+            Projectos
           </NavLink>
         </nav>
       </aside>

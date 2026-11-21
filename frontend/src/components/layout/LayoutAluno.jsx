@@ -19,11 +19,17 @@ function LayoutAluno() {
           <NavLink to="/aluno/perfil" className={estiloLink}>
             Perfil
           </NavLink>
+          <NavLink to="/aluno/matching" className={estiloLink}>
+            Matching
+          </NavLink>
           <NavLink to="/aluno/materiais" className={estiloLink}>
             Materiais
           </NavLink>
+          <NavLink to="/aluno/pedidos" className={estiloLink}>
+            Pedidos
+          </NavLink>
           <NavLink to="/aluno/projetos" className={estiloLink}>
-            Projetos
+            Projectos
           </NavLink>
         </nav>
       </aside>
