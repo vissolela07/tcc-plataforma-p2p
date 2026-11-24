@@ -1,48 +1,16 @@
-import { NavLink, Outlet } from 'react-router'
-import Navbar from './Navbar'
+import LayoutBase from './LayoutBase'
+
+const links = [
+  { para: '/aluno', texto: 'Início', fim: true },
+  { para: '/aluno/perfil', texto: 'Perfil' },
+  { para: '/aluno/matching', texto: 'Matching' },
+  { para: '/aluno/materiais', texto: 'Materiais' },
+  { para: '/aluno/pedidos', texto: 'Pedidos' },
+  { para: '/aluno/projetos', texto: 'Projectos' },
+]
 
 function LayoutAluno() {
-  const estiloLink = ({ isActive }) =>
-    isActive
-      ? 'block px-3 py-2 rounded bg-terracota text-creme font-semibold'
-      : 'block px-3 py-2 rounded text-nogueira hover:bg-creme/70'
-
-  return (
-    <div className="min-h-screen flex bg-creme text-nogueira">
-      <aside className="w-60 shrink-0 border-r border-nogueira p-4 flex flex-col gap-4">
-        <span className="text-lg font-bold">Área do Aluno</span>
-
-        <nav className="flex flex-col gap-1">
-          <NavLink to="/aluno" end className={estiloLink}>
-            Início
-          </NavLink>
-          <NavLink to="/aluno/perfil" className={estiloLink}>
-            Perfil
-          </NavLink>
-          <NavLink to="/aluno/matching" className={estiloLink}>
-            Matching
-          </NavLink>
-          <NavLink to="/aluno/materiais" className={estiloLink}>
-            Materiais
-          </NavLink>
-          <NavLink to="/aluno/pedidos" className={estiloLink}>
-            Pedidos
-          </NavLink>
-          <NavLink to="/aluno/projetos" className={estiloLink}>
-            Projectos
-          </NavLink>
-        </nav>
-      </aside>
-
-      <div className="flex-1 flex flex-col min-w-0">
-        <Navbar />
-
-        <main className="flex-1 p-6">
-          <Outlet />
-        </main>
-      </div>
-    </div>
-  )
+  return <LayoutBase titulo="Área do Aluno" links={links} />
 }
 
 export default LayoutAluno
