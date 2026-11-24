@@ -1,16 +1,44 @@
+import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router'
 import Navbar from './Navbar'
 
 function LayoutBase({ titulo, links }) {
+  const [menuAberto, setMenuAberto] = useState(false)
+
   const estiloLink = ({ isActive }) =>
     isActive
       ? 'block px-3 py-2 rounded bg-terracota text-creme font-semibold'
-      : 'block px-3 py-2 rounded text-nogueira hover:bg-creme/70'
+      : 'block px-3 py-2 rounded text-nogueira hover:bg-nogueira/10'
 
   return (
     <div className="min-h-screen flex bg-creme text-nogueira">
-      <aside className="w-60 shrink-0 border-r border-nogueira p-4 flex flex-col gap-4">
-        <span className="text-lg font-bold">{titulo}</span>
+      {menuAberto && (
+        <div
+          className="fixed inset-0 z-30 bg-nogueira/40 md:hidden"
+          onClick={() => setMenuAberto(false)}
+        />
+      )}
+
+      <aside
+        className={`
+          fixed inset-y-0 left-0 z-40 w-60 p-4
+          flex flex-col gap-4 bg-creme border-r border-nogueira
+          transition-transform
+          ${menuAberto ? 'translate-x-0' : '-translate-x-full'}
+          md:static md:translate-x-0 md:shrink-0
+        `}
+      >
+        <div className="flex items-center justify-between">
+          <span className="text-lg font-bold">{titulo}</span>
+          <button
+            type="button"
+            onClick={() => setMenuAberto(false)}
+            aria-label="Fechar menu"
+            className="md:hidden text-2xl leading-none"
+          >
+            ×
+          </button>
+        </div>
 
         <nav className="flex flex-col gap-1">
           {links.map((link) => (
@@ -19,6 +47,7 @@ function LayoutBase({ titulo, links }) {
               to={link.para}
               end={link.fim}
               className={estiloLink}
+              onClick={() => setMenuAberto(false)}
             >
               {link.texto}
             </NavLink>
@@ -27,9 +56,9 @@ function LayoutBase({ titulo, links }) {
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <Navbar />
+        <Navbar aoAbrirMenu={() => setMenuAberto(true)} />
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 md:p-6">
           <Outlet />
         </main>
       </div>
